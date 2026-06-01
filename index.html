@@ -1,0 +1,567 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Stackboard — Support</title>
+  <style>
+    :root {
+      --bg: #0f0f0f;
+      --surface: #1a1a1a;
+      --border: #2a2a2a;
+      --accent: #4f8ef7;
+      --text: #e8e8e8;
+      --muted: #888;
+      --radius: 14px;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", "Segoe UI", sans-serif;
+      line-height: 1.7;
+      font-size: 16px;
+    }
+
+    /* NAV */
+    nav {
+      position: sticky;
+      top: 0;
+      background: rgba(15,15,15,0.88);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border-bottom: 1px solid var(--border);
+      z-index: 100;
+      padding: 0 24px;
+    }
+
+    .nav-inner {
+      max-width: 860px;
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      height: 60px;
+      gap: 24px;
+    }
+
+    .nav-logo {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      text-decoration: none;
+      color: var(--text);
+      font-weight: 600;
+      font-size: 17px;
+    }
+
+    .nav-logo img {
+      width: 32px;
+      height: 32px;
+      border-radius: 8px;
+      object-fit: cover;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 4px;
+    }
+
+    .nav-links a {
+      color: var(--muted);
+      text-decoration: none;
+      font-size: 14px;
+      padding: 6px 12px;
+      border-radius: 8px;
+      transition: color 0.15s, background 0.15s;
+    }
+
+    .nav-links a:hover,
+    .nav-links a.active {
+      color: var(--text);
+      background: var(--surface);
+    }
+
+    /* HERO */
+    .hero {
+      text-align: center;
+      padding: 80px 24px 60px;
+    }
+
+    .hero-logo {
+      width: 96px;
+      height: 96px;
+      border-radius: 22px;
+      object-fit: cover;
+      margin-bottom: 20px;
+      box-shadow: 0 8px 32px rgba(0,0,0,0.5);
+    }
+
+    .hero h1 {
+      font-size: 36px;
+      font-weight: 700;
+      letter-spacing: -0.5px;
+      margin-bottom: 10px;
+    }
+
+    .hero p {
+      color: var(--muted);
+      font-size: 17px;
+      max-width: 480px;
+      margin: 0 auto;
+    }
+
+    /* SECTIONS */
+    .section {
+      max-width: 860px;
+      margin: 0 auto;
+      padding: 0 24px 80px;
+    }
+
+    .section-title {
+      font-size: 24px;
+      font-weight: 700;
+      margin-bottom: 24px;
+      letter-spacing: -0.3px;
+    }
+
+    /* FAQ */
+    .faq-list {
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+    }
+
+    details {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      overflow: hidden;
+    }
+
+    details + details {
+      border-radius: var(--radius);
+    }
+
+    summary {
+      padding: 18px 20px;
+      font-weight: 600;
+      cursor: pointer;
+      list-style: none;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 16px;
+      font-size: 15px;
+      user-select: none;
+    }
+
+    summary::-webkit-details-marker { display: none; }
+
+    summary::after {
+      content: "+";
+      font-size: 20px;
+      color: var(--accent);
+      flex-shrink: 0;
+      font-weight: 400;
+      transition: transform 0.2s;
+    }
+
+    details[open] summary::after {
+      transform: rotate(45deg);
+    }
+
+    .faq-answer {
+      padding: 0 20px 18px;
+      color: var(--muted);
+      font-size: 15px;
+      line-height: 1.7;
+      border-top: 1px solid var(--border);
+      padding-top: 14px;
+    }
+
+    /* LEGAL CONTENT */
+    .legal-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 32px;
+    }
+
+    .legal-card h2 {
+      font-size: 20px;
+      font-weight: 700;
+      margin: 28px 0 10px;
+      color: var(--text);
+    }
+
+    .legal-card h2:first-child {
+      margin-top: 0;
+    }
+
+    .legal-card p {
+      color: var(--muted);
+      font-size: 14px;
+      margin-bottom: 12px;
+    }
+
+    .legal-card ul {
+      color: var(--muted);
+      font-size: 14px;
+      padding-left: 20px;
+      margin-bottom: 12px;
+    }
+
+    .legal-card ul li {
+      margin-bottom: 6px;
+    }
+
+    .legal-card a {
+      color: var(--accent);
+      text-decoration: none;
+    }
+
+    .legal-card a:hover {
+      text-decoration: underline;
+    }
+
+    .effective-date {
+      display: inline-block;
+      background: var(--border);
+      color: var(--muted);
+      font-size: 13px;
+      padding: 4px 10px;
+      border-radius: 6px;
+      margin-bottom: 28px;
+    }
+
+    /* TABS */
+    .tab-bar {
+      display: flex;
+      gap: 4px;
+      margin-bottom: 24px;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 4px;
+      width: fit-content;
+    }
+
+    .tab-btn {
+      background: none;
+      border: none;
+      color: var(--muted);
+      font-size: 14px;
+      font-weight: 500;
+      padding: 7px 16px;
+      border-radius: 7px;
+      cursor: pointer;
+      transition: background 0.15s, color 0.15s;
+      font-family: inherit;
+    }
+
+    .tab-btn.active {
+      background: var(--bg);
+      color: var(--text);
+    }
+
+    .tab-panel { display: none; }
+    .tab-panel.active { display: block; }
+
+    /* DIVIDER */
+    .divider {
+      border: none;
+      border-top: 1px solid var(--border);
+      margin: 0 0 64px;
+    }
+
+    /* FOOTER */
+    footer {
+      border-top: 1px solid var(--border);
+      padding: 32px 24px;
+      text-align: center;
+      color: var(--muted);
+      font-size: 13px;
+    }
+
+    footer a {
+      color: var(--muted);
+      text-decoration: none;
+    }
+
+    footer a:hover { color: var(--text); }
+
+    /* SMOOTH SCROLL */
+    html { scroll-behavior: smooth; }
+
+    @media (max-width: 600px) {
+      .hero h1 { font-size: 28px; }
+      .legal-card { padding: 20px; }
+      .nav-links a { font-size: 13px; padding: 6px 8px; }
+    }
+  </style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-inner">
+    <a class="nav-logo" href="#">
+      <img src="Stackboard_Logo.jpg" alt="Stackboard logo" />
+      Stackboard
+    </a>
+    <div class="nav-links">
+      <a href="#faq" class="active">FAQ</a>
+      <a href="#legal">Privacy &amp; Terms</a>
+    </div>
+  </div>
+</nav>
+
+<div class="hero">
+  <img class="hero-logo" src="Stackboard_Logo.jpg" alt="Stackboard" />
+  <h1>Stackboard Support</h1>
+  <p>Answers to common questions, plus our Privacy Policy and Terms of Service.</p>
+</div>
+
+<!-- FAQ -->
+<section class="section" id="faq">
+  <div class="section-title">Frequently Asked Questions</div>
+  <div class="faq-list">
+
+    <details open>
+      <summary>What is Stackboard?</summary>
+      <div class="faq-answer">
+        Stackboard is a clipboard manager for iPhone and iPad. It automatically saves everything you copy so you can find and paste it again at any time, without having to re-copy or re-type anything.
+      </div>
+    </details>
+
+    <details>
+      <summary>How does it work on iOS?</summary>
+      <div class="faq-answer">
+        Because iOS restricts background clipboard access, Stackboard uses a custom keyboard extension. Once you enable the Stackboard keyboard in your device settings, it appears alongside your regular keyboard in any app. Tap a saved clip and it pastes instantly, without leaving the app you are in.
+      </div>
+    </details>
+
+    <details>
+      <summary>How do I enable the Stackboard keyboard?</summary>
+      <div class="faq-answer">
+        Go to Settings → General → Keyboard → Keyboards → Add New Keyboard and select Stackboard. When prompted, tap Allow Full Access. This permission is required so the keyboard extension can read and save your clipboard entries to the shared app container.
+      </div>
+    </details>
+
+    <details>
+      <summary>Why does the keyboard need Full Access?</summary>
+      <div class="faq-answer">
+        iOS keyboard extensions cannot communicate with the main app without Full Access enabled. Stackboard uses this permission solely to save clipboard entries on your device. No data is sent to any server unless you opt in to iCloud sync.
+      </div>
+    </details>
+
+    <details>
+      <summary>Does my clipboard data leave my device?</summary>
+      <div class="faq-answer">
+        No. All clipboard history is stored locally on your device by default. iCloud sync is strictly opt in and disabled by default. If you choose to enable it, your clips are synced privately through your personal iCloud account.
+      </div>
+    </details>
+
+    <details>
+      <summary>Can I use Stackboard across multiple devices?</summary>
+      <div class="faq-answer">
+        Yes. Enable iCloud sync in Stackboard settings and your clipboard history will be available across all your iOS devices signed in to the same Apple ID.
+      </div>
+    </details>
+
+    <details>
+      <summary>How do I pin a clip?</summary>
+      <div class="faq-answer">
+        Long press any clip in your history to reveal options, then tap Pin. Pinned clips stay at the top of your list and are never automatically deleted.
+      </div>
+    </details>
+
+    <details>
+      <summary>Is there a limit to how much history Stackboard saves?</summary>
+      <div class="faq-answer">
+        You can configure a history size limit and auto expiry in Stackboard settings. This lets you control how much storage the app uses and how long clips are retained for privacy.
+      </div>
+    </details>
+
+    <details>
+      <summary>Can I search my clipboard history?</summary>
+      <div class="faq-answer">
+        Yes. Tap the search bar at the top of the Stackboard keyboard or the main app to search across your entire clipboard history instantly.
+      </div>
+    </details>
+
+    <details>
+      <summary>Does Stackboard work with images?</summary>
+      <div class="faq-answer">
+        Stackboard saves text, URLs, and images that you copy to your clipboard. You can browse and re-paste any of these from your history.
+      </div>
+    </details>
+
+    <details>
+      <summary>How do I delete a clip?</summary>
+      <div class="faq-answer">
+        Swipe left on any clip in the list to reveal the delete option, or long press to access additional options including delete.
+      </div>
+    </details>
+
+    <details>
+      <summary>Who do I contact for support?</summary>
+      <div class="faq-answer">
+        Reach out to us any time at <a href="mailto:halilovicadi@icloud.com">halilovicadi@icloud.com</a> and we will get back to you as soon as possible.
+      </div>
+    </details>
+
+  </div>
+</section>
+
+<hr class="divider" style="max-width:860px; margin: 0 auto 64px;" />
+
+<!-- LEGAL -->
+<section class="section" id="legal">
+  <div class="section-title">Privacy &amp; Terms</div>
+
+  <div class="tab-bar">
+    <button class="tab-btn active" onclick="switchTab('privacy', this)">Privacy Policy</button>
+    <button class="tab-btn" onclick="switchTab('terms', this)">Terms &amp; Conditions</button>
+  </div>
+
+  <!-- PRIVACY POLICY -->
+  <div id="tab-privacy" class="tab-panel active">
+    <div class="legal-card">
+      <span class="effective-date">Effective: June 1, 2026</span>
+
+      <h2>Privacy Policy</h2>
+      <p>This privacy policy applies to the Stackboard app for mobile devices, together with any related services operated by Adin Halilovic (collectively, the "Application"). Adin Halilovic is hereby referred to as the "Service Provider".</p>
+
+      <h2>Information Collection and Use</h2>
+      <p>The Application collects information when you download and use it. This information may include:</p>
+      <ul>
+        <li>Your device's Internet Protocol address</li>
+        <li>The pages of the Application that you visit, the time and date of your visit, and time spent on those pages</li>
+        <li>The time spent on the Application</li>
+        <li>The mobile operating system you use</li>
+      </ul>
+
+      <h2>Cookies and Tracking Technologies</h2>
+      <p>The Application or its third-party SDKs may use cookies, SDKs, pixels, and similar technologies to support functionality, analytics, or service delivery. Where required by applicable law, the Service Provider will obtain consent before using non-essential tracking technologies.</p>
+
+      <h2>Your Rights</h2>
+      <p>You may request access to, correction of, or deletion of your personal data held by the Service Provider. To exercise these rights, or to withdraw consent where processing is based on consent, contact the Service Provider at <a href="mailto:halilovicadi@icloud.com">halilovicadi@icloud.com</a>.</p>
+
+      <h2>Your California Privacy Rights (CCPA/CPRA)</h2>
+      <p>If you are a California resident, you have the right to know what personal information is collected, the right to delete personal information, the right to opt out of the sale or sharing of personal information, and the right to non-discrimination for exercising these rights. To exercise your CCPA/CPRA rights, contact the Service Provider at <a href="mailto:halilovicadi@icloud.com">halilovicadi@icloud.com</a>.</p>
+
+      <h2>Third Party Access</h2>
+      <p>Only aggregated, anonymized data is periodically transmitted to external services to aid the Service Provider in improving the Application. The Service Provider may share your information with third parties as described in this privacy statement.</p>
+
+      <h2>International Data Transfers</h2>
+      <p>The Service Provider or its third-party service providers may transfer personal data to countries outside your country of residence, including outside the European Economic Area (EEA). Where applicable law requires safeguards, the Service Provider will use appropriate mechanisms such as:</p>
+      <ul>
+        <li>Standard Contractual Clauses (SCCs) approved by the European Commission</li>
+        <li>Adequacy decisions or other legally recognized transfer mechanisms</li>
+        <li>Your consent, where required and legally permitted</li>
+      </ul>
+
+      <h2>Opt-Out Rights</h2>
+      <p>You can stop further collection of information from your mobile device by uninstalling the Application. To request deletion of your personal data or to withdraw consent, contact the Service Provider at <a href="mailto:halilovicadi@icloud.com">halilovicadi@icloud.com</a>.</p>
+
+      <h2>Data Retention Policy</h2>
+      <ul>
+        <li>User Provided Data: Retained for the duration of your use plus 12 months thereafter, unless longer retention is required by law</li>
+        <li>Automatically Collected Data: Retained for up to 24 months from collection</li>
+        <li>Aggregated and Anonymized Data: Retained indefinitely as it no longer identifies you</li>
+        <li>Data required for legal compliance: Retained as long as required by applicable law</li>
+      </ul>
+
+      <h2>Children</h2>
+      <p>The Application is not intended for children under 16 years of age. The Service Provider does not knowingly collect personally identifiable information from children. If you believe a child has provided personal information, please contact <a href="mailto:halilovicadi@icloud.com">halilovicadi@icloud.com</a>.</p>
+
+      <h2>Security</h2>
+      <p>The Service Provider provides physical, electronic, and procedural safeguards to protect information it processes and maintains.</p>
+
+      <h2>Data Breach Notification</h2>
+      <p>If a data breach occurs that affects your personal data, the Service Provider will notify you in accordance with applicable legal requirements.</p>
+
+      <h2>Changes</h2>
+      <p>The Service Provider may update this Privacy Policy from time to time. Material changes will be communicated by posting an updated policy with an effective date. Previous versions are available upon request at <a href="mailto:halilovicadi@icloud.com">halilovicadi@icloud.com</a>.</p>
+
+      <h2>Your Consent</h2>
+      <p>Where processing is based on consent, you provide that consent by affirmatively opting in to the relevant feature. You may withdraw consent at any time without affecting processing carried out before withdrawal.</p>
+
+      <h2>Contact Us</h2>
+      <p>If you have any questions regarding privacy, please contact the Service Provider at <a href="mailto:halilovicadi@icloud.com">halilovicadi@icloud.com</a>.</p>
+    </div>
+  </div>
+
+  <!-- TERMS -->
+  <div id="tab-terms" class="tab-panel">
+    <div class="legal-card">
+      <span class="effective-date">Effective: June 1, 2026</span>
+
+      <h2>Terms &amp; Conditions</h2>
+      <p>These terms and conditions apply to the Stackboard app for mobile devices, together with any related services operated by Adin Halilovic (collectively, the "Application"). By downloading or using the Application, you agree to these Terms and Conditions.</p>
+
+      <h2>License to Use the Application</h2>
+      <p>Subject to your compliance with these Terms, the Service Provider grants you a limited, non-exclusive, non-transferable, revocable license to install and use the Application on a mobile device for personal or internal business purposes. You may not reproduce, distribute, modify, create derivative works from, reverse engineer, decompile, or disassemble the Application except as expressly permitted by applicable law.</p>
+
+      <h2>Intellectual Property</h2>
+      <p>The Service Provider retains all intellectual property rights in the Application, including its code, design, trademarks, service marks, trade names, logos, and branding. Nothing in these Terms grants you any license or right to use the Service Provider's trademarks or branding for any purpose.</p>
+
+      <h2>Termination</h2>
+      <p>The Service Provider may suspend your access if you materially breach these Terms, providing 14 days written notice to remedy the breach where possible. Immediate suspension may occur for violations of applicable law, intellectual property infringement, or activity that could harm other users.</p>
+
+      <h2>Acceptable Use</h2>
+      <p>You agree not to use the Application to post or share content that is illegal, abusive, harassing, defamatory, discriminatory, spam, phishing, or that violates the privacy rights of others. The Service Provider reserves the right to remove violating content and suspend accounts accordingly.</p>
+
+      <h2>Limitation of Liability</h2>
+      <p>To the fullest extent permitted by law, the Service Provider shall not be liable for any indirect, incidental, special, consequential, or punitive damages. The Service Provider retains full liability for death or personal injury caused by negligence, fraud, or any liability that cannot be excluded under applicable law.</p>
+
+      <h2>Indemnification</h2>
+      <p>To the fullest extent permitted by law, you agree to indemnify and hold harmless the Service Provider from any claims arising out of your breach of these Terms or your intentional misuse of the Application.</p>
+
+      <h2>Governing Law and Jurisdiction</h2>
+      <p>These Terms are governed by the laws of the jurisdiction in which the Service Provider is established, excluding conflict of law rules, except where mandatory consumer protection laws provide otherwise.</p>
+
+      <h2>DSA Compliance</h2>
+      <p>Where the Application qualifies as an intermediary service under the EU Digital Services Act (Regulation (EU) 2022/2065), the Service Provider maintains a single point of contact for EU authorities at <a href="mailto:halilovicadi@icloud.com">halilovicadi@icloud.com</a> and will process content notices promptly and in accordance with Article 16 of the DSA.</p>
+
+      <h2>Changes to These Terms</h2>
+      <p>The Service Provider may periodically update these Terms and Conditions. You are advised to review this page regularly. Previous versions are available upon request at <a href="mailto:halilovicadi@icloud.com">halilovicadi@icloud.com</a>.</p>
+
+      <h2>Contact Us</h2>
+      <p>If you have any questions about these Terms and Conditions, please contact the Service Provider at <a href="mailto:halilovicadi@icloud.com">halilovicadi@icloud.com</a>.</p>
+    </div>
+  </div>
+
+</section>
+
+<footer>
+  <p>&copy; 2026 Stackboard by Adin Halilovic &nbsp;&middot;&nbsp; <a href="mailto:halilovicadi@icloud.com">halilovicadi@icloud.com</a></p>
+</footer>
+
+<script>
+  function switchTab(name, btn) {
+    document.querySelectorAll('.tab-panel').forEach(p => p.classList.remove('active'));
+    document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+    document.getElementById('tab-' + name).classList.add('active');
+    btn.classList.add('active');
+  }
+
+  // Highlight active nav link on scroll
+  const sections = document.querySelectorAll('section[id]');
+  const navLinks = document.querySelectorAll('.nav-links a');
+  window.addEventListener('scroll', () => {
+    let current = '';
+    sections.forEach(s => {
+      if (window.scrollY >= s.offsetTop - 100) current = s.id;
+    });
+    navLinks.forEach(a => {
+      a.classList.toggle('active', a.getAttribute('href') === '#' + current);
+    });
+  });
+</script>
+
+</body>
+</html>
